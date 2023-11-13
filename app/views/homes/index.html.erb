@@ -13,11 +13,10 @@
       <tr>
         <td><%= book.title %></td>
         <td><%= book.body %></td>
-        <td><%= link_to "Show", books_path(book.id) %></td>
-        <!--↑画面遷移しないのは？-->
-        <td><%= link_to "Edit", edit_book_path(book.id) %></td>
-        <td><%= link_to "Destroy", books_path(book.id), "deta-confirm" => "Are You Sure?" %></td>
-      　<!--↑削除されないのはなぜ？-->
+        <td><%= link_to "Show", "/books/#{book.id}" %></td>
+        <td><%= link_to "Edit", edit_book_path(book[:id]) %></td>
+        <!--↑登録済みのデータが反映されていないのは？-->
+        <td><%= link_to "Destroy", destroy_book_path(book[:id]), method: :delete, "data-confirm" => "Are You Sure?" %></td>
       </tr>
     <% end %>
   </tbody>
@@ -41,4 +40,6 @@
   <%= f.text_area :body %>
 	
   <%= f.submit 'Create Book' %>
+  <!--↑入力済みデータを表示させる画面に行かない-->
+  
 <% end %>

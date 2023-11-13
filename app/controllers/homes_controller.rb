@@ -1,21 +1,21 @@
 class HomesController < ApplicationController
-
   def index
     @books = Book.all
     @book = Book.new
   end
   
+  def new
+    @list = List.new
+  end
+  
   def create
     @book = Book.new(book_params)
-    if @book.save
-      redirect_to books_path(@book)
-    else
-      render :index
-    end
+    @book.save
+    flash[:notice] = "Book was successfully created."
+    redirect_to "/books/#{@book.id}"
   end
   
   def show
-    flash[:notice] = "Book was successfully created."
     @book = Book.find(params[:id])
   end
   
